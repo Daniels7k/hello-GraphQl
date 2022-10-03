@@ -8,6 +8,7 @@ import {
 
 import "./App.css";
 import CreateUser from "./components/CreateUser";
+import ListOfUsers from "./components/ListOfUsers";
 
 function App() {
   
@@ -19,6 +20,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <CreateUser />
+      <ListOfUsers />
     </ApolloProvider>
   );
 }
