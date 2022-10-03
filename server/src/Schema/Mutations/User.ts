@@ -1,6 +1,8 @@
 import { GraphQLID, GraphQLString } from "graphql";
 import { Users } from "../../Entities/Users";
+
 import { UserType } from "../TypeDefs/User";
+import { MessageType } from "../TypeDefs/Message";
 
 export const CREATE_USER = {
   type: UserType,
@@ -17,19 +19,23 @@ export const CREATE_USER = {
 };
 
 export const DELETE_USER = {
-  type: UserType,
+  type: MessageType,
   args: {
     id: { type: GraphQLID },
   },
   async resolve(parent: any, args: any) {
     const { id } = args;
-    await Users.delete(id);
-    return args;
+    const user = await Users.delete(id);
+
+    if (!user.affected) {
+      throw new Error("User doesnt exist");
+    }
+    return { successful: true, message: "User Deleted" };
   },
 };
 
 export const UPDATE_PASSWORD = {
-  type: UserType,
+  type: MessageType,
   args: {
     username: { type: GraphQLString },
     oldPassword: { type: GraphQLString },
@@ -39,12 +45,13 @@ export const UPDATE_PASSWORD = {
     const { username, oldPassword, newPassword } = args;
     const user = await Users.findOne({ where: { username: username } });
     const userPassword = user?.password;
-    console.log(user)
     if (oldPassword === userPassword) {
-      return await Users.update(
+      await Users.update(
         { username: username },
         { password: newPassword }
       );
+
+      return {successful: true, message:"PASSWORD UPDATED"}
     } else {
       throw new Error("PASSWORDS DO NOT MATCH");
     }
