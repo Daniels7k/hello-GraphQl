@@ -1,4 +1,7 @@
 import React from "react";
+import CreateUser from "./components/CreateUser";
+import ListOfUsers from "./components/ListOfUsers";
+import UpdatePassword from "./components/UpdatePassword";
 
 import {
   ApolloClient,
@@ -7,8 +10,7 @@ import {
 } from "@apollo/client";
 
 import "./App.css";
-import CreateUser from "./components/CreateUser";
-import ListOfUsers from "./components/ListOfUsers";
+
 
 function App() {
   
@@ -21,6 +23,7 @@ function App() {
     <ApolloProvider client={client}>
       <CreateUser />
       <ListOfUsers />
+      <UpdatePassword />
     </ApolloProvider>
   );
 }
