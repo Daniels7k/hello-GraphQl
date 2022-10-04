@@ -17,6 +17,7 @@ export const CREATE_USER = gql`
         }
   }
 `;
+<<<<<<< HEAD
 
 export const UPDATE_PASSWORD = gql`
   mutation updatePassword(
@@ -41,3 +42,5 @@ export const DELETE_USER = gql`
     }
   }
 `
+=======
+>>>>>>> parent of c575c2c (delete user function)
