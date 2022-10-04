@@ -10,6 +10,10 @@ const UpdatePassword = () => {
 
   const [updatePassword, { error }] = useMutation(UPDATE_PASSWORD);
 
+  if(error){
+    console.log(error)
+  }
+
   return (
     <div>
       <input

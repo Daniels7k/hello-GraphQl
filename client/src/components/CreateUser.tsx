@@ -10,6 +10,10 @@ const CreateUser = () => {
 
   const [createUser, { error }] = useMutation(CREATE_USER);
 
+  if(error){
+    console.log(error)
+  }
+
   return (
     <div className="createUser">
       <input
